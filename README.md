@@ -36,3 +36,6 @@ ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf
 AVR-libc user manual:
 cs.ou.edu/~fagg/classes/general/atmel/avr-libc-user-manual-1.7.1.pdf
 
+All circuit diagrams were drawn using EasyEDA:
+easyeda.com
+

@@ -19,3 +19,20 @@ Topics covered
 
 **Lesson 1:** toolchain installation; desktop vs. MCU programming; gcc-avr
 basics; programming the MCU with avrdude; make an LED flash. 
+
+
+Useful Resources
+----------------
+
+Another AVR tutorial series, in C:
+newbiehack.com/MicrocontrollerTutorial.aspx
+
+Instruction set summary for AVR MCUs:
+avr-tutorials.com/sites/default/files/Instruction Set Summary.pdf
+
+ATmega32 datasheet:
+ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf
+
+AVR-libc user manual:
+cs.ou.edu/~fagg/classes/general/atmel/avr-libc-user-manual-1.7.1.pdf
+

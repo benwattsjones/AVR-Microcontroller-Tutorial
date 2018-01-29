@@ -5,7 +5,7 @@ This lesson covers:
  - Installation of the toolchain used
  - How to program the MCU using a raspberry pi
  - The basics of MCU programming and gcc-avr 
- - Designing a circuit/code that will make an LED flash
+ - Designing a circuit/code that will make an LED turn on
 
 Installation (Raspbian)
 -----------------------
@@ -41,7 +41,7 @@ Connect the RPi to the AVR microcontroller (via a breadboard):
  - AVR MISO to RPi GPIO #18
 
 Installing avrdude (see prev) created a configuration file /etc/avrdude.conf.
-Copy the contents of this file to new avrdude_gpio.conf. Append the following
+Copy the contents of this file to new avrdude\_gpio.conf. Append the following
 to the end of the file:
 
 ```
@@ -75,11 +75,12 @@ Toolchain Used
 --------------
 
 I am using the avr-as assembler, not the popular Windows ATMEL Studio 
-assembler. The syntax is very similar, but note a few differences:
+assembler. The syntax is very similar, but note a few differences
+(Don't worry, the details of the assembler are discussed throughout the series):
  - Use `lo8(0xabcd)` (results in 0xcd) and `hi8()` instead of `low()` 
    and `high()`
  - Use `.byte` instead of `.db` to store information in data segment;
-   explicitly separate strings into char arrays (covered later)
+   explicitly separate strings into char arrays 
 
 **Assembly and linking:**
 
@@ -99,8 +100,8 @@ avr-objcopy -O ihex -R .eeprom myfile.elf myfile.hex
 
 Intel HEX format binary file created. This is the MCU's machine code.
 
-Basics of MCU programming - Theory
-----------------------------------
+Basics of MCU I/O programming - Theory
+--------------------------------------
 
 In desktop computers, registers (e.g. EAX) and memory (DRAM) do not share a 
 memory addressing scheme - the registers live only inside the CPU. This is
@@ -148,12 +149,15 @@ in different AVR microcontrollers. The C preprocessor and compiler options
 are used to convert I/O register names to their corresponding I/O space 
 addresses understood by the assembler.
 
-Basics of AVR programming - Practice
-------------------------------------
+For more information, it is strongly recommended you read the datasheet and
+instruction set summary, linked in the main README.
+
+Basics of AVR I/O programming - Practice
+----------------------------------------
 
 The macro `#include <avr/io.h>` is added to the start of the assembly 
 file which converts the registers (e.g. PORTA) to I/O space addresses using the 
-_SFR_IO_ADDR() macro. Remember the file type must be .S (capital S) so avr-gcc 
+\_SFR\_IO\_ADDR() macro. Remember the file type must be .S (capital S) so avr-gcc 
 invokes the C pre-comiler even though the file type is assembly. The AVR 
 microcontroller used is given to the assembler with the `-mmcu=` option (see
 'Toolchain Used' section, above).
@@ -173,6 +177,48 @@ main:
     // Code here
 ```
 
+Three main registers are involved in manipulating MCU pins. DDRxn determins 
+whether a pin is an input (bit is 0) or output (bit is 1). For example the 
+following configures PORTA3 to be an output:
 
+```
+ldi r16, 0b00001000
+out _SFR_IO_ADDR(DDRA), r16
+```
 
+If a pin is configured to be an output, it may be activated (becomes +5V 
+terminal) using PORTxn. Following on from the previous example, to output from
+PORTA3:
+
+```
+out _SFR_IO_ADDR(PORTA), r16
+```
+
+If a pin is configured as a input, than the PINxn bits are determined by the
+input voltages to those pins, being 1 upon 5V input (the current is irrelevant
+due to purely voltage-driven CMOS use). If a pin is configured as an output,
+PINxn bits are synchonized to PORTxn bits. Pin values can be read as follows,
+though note that if pin values are to be read immidiately after setting PORTxn,
+a NOP instruction must be inserted before PINxn values are read so that PORTxn
+and PINxn values are synchronized.
+
+```
+in r17, _SFR_IO_ADD(PINA)
+```
+
+Practical task: Making an LED turn on
+-------------------------------------
+
+The electronic circuit required is described in 'L1-Circuit-diagram-LED.png',
+though note that minor modifications may be required if a different Atmel MCU
+with different pin arrangements is used. A 5V power source may be created using
+a 5V AC adaptor (such as a USB phone charger). Stripping the outer wire coating
+should reveal four wires, with a red +5V and black ground (the other wires are
+for data transfer and are not required). The red wire must be connected to the
+VCC and AVCC pins and the black to the ground pins to power the device.
+
+We will program PORTA0 to be an output, providing 5V. A resister is used to 
+limit the current through the LED, which of course must be connected to ground.
+If the MCU is correctly programmed with the code in LED\_on.S and connected to
+the described circuit, the LED should turn when power is given.
 

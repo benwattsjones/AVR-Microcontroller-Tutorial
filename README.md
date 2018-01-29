@@ -18,7 +18,7 @@ Topics covered
 --------------
 
 **Lesson 1:** toolchain installation; desktop vs. MCU programming; gcc-avr
-basics; programming the MCU with avrdude; make an LED flash. 
+basics; programming the MCU with avrdude; make an LED turn on. 
 
 
 Useful Resources

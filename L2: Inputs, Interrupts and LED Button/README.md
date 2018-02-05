@@ -19,7 +19,7 @@ was used will be revealed later). This will be controlled by a button. When the
 button is held down, current will flow to PORTB2. We will write software such 
 that this causes the LED, connected to PORTA0 from lesson 1, to turn on.
 
-The schematic is shown below.
+The schematic is shown below. (See 'L2-Circuit-Diagram-LED-Button.png')
 
 ![L2 circuit diagram](L2-Circuit-Diagram-LED-Button.png)
 
@@ -49,6 +49,11 @@ btn_up:                            ; Code only executed if button not pressed
     out _SFR_IO_ADDR(PORTA), r18   ; No output from Port A pin 0 - LED turns off
     rjmp loop                      ; Return to start of loop
 ```
+
+However, this method requires the input to be continually tested for on a loop,
+preventing anything else from being done while we wait form the button to be
+depressed. A more clever way of detecting the button can thus be achieved using
+interrupts. Before we can do this, some more theory must be covered.
 
 A new register - SREG - Theory pt. 2
 ------------------------------------

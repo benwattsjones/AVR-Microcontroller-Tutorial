@@ -14,7 +14,7 @@ GCC-AVR, and related programs, are needed to compile our assembly code to the
 Intel HEX binary format natively read by the MCU. AVRDUDE is a program used to
 get this machine code onto the MCUs EEPROM flash memory. It is assumed you are
 using a Raspberry Pi as a programmer with Raspbian OS - it is entirely
-possible to use a different hardware programmer though seek other instructions
+possible to use a different hardware programmer, though seek other instructions
 on programming the MCU before skipping below to the 'Toolchain Used' section.
 
 ```
@@ -24,13 +24,14 @@ sudo apt-get install avrdude avrdude-doc binutils-avr avr-libc gcc-avr gdb-avr
 Using a Raspberry Pi as an AVR programmer
 -----------------------------------------
 
-NOTE: if using dedicated hardware programmer, seek seperate instructions
-and skip to 'Toolchain Used' section.
+_NOTE: if using dedicated hardware programmer, seek seperate instructions
+and skip to 'Toolchain Used' section._
 
-Once the intel hex file is created (covered later), the EEPROM of the AVR 
-microcontroller needs to be flashed. Whilst dedicated programmers can be 
-brought, it will be done here using avrdude software with physical 
-interfacing via RPi GPIO pins.
+Once the intel hex machine code file is created (covered later), the EEPROM of 
+the AVR microcontroller needs to be flashed. This will be done so that our
+code automatically executes when the MCU is powered. Whilst dedicated 
+programmers can be brought, it will be done here using avrdude software with 
+physical interfacing via RPi GPIO pins.
 
 Connect the RPi to the AVR microcontroller (via a breadboard):
  - AVR VCC to RPi 5 volt pin
@@ -62,7 +63,7 @@ Verify the RPi can connect to the AVR microcontroller:
 sudo avrdude -p atmega32 -C avrdude_gpio.conf -c pi_1 -v
 ```
 
-Program the AVR microcontroller:
+Program the AVR microcontroller by flashing file `myfile.hex`:
 
 ```
 sudo avrdude -p atmega32 -C avrdude_gpio.conf -c pi_1 -v -U flask:w:myfile.hex:i
@@ -99,6 +100,9 @@ avr-objcopy -O ihex -R .eeprom myfile.elf myfile.hex
 ```
 
 Intel HEX format binary file created. This is the MCU's machine code.
+
+We will now write assembly code to control and LED attacted to the MCU. Before
+we do this however, some theory must be covered.
 
 Basics of Registers and MCU I/O programming - Theory pt. 1
 ----------------------------------------------------------

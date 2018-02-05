@@ -17,9 +17,12 @@ LEDs...) and a 5V AC adaptor (e.g. phone charger) are required.
 Topics covered
 --------------
 
-**Lesson 1:** toolchain installation; desktop vs. MCU programming; gcc-avr
-basics; programming the MCU with avrdude; make an LED turn on. 
+**Lesson 1: Setup and LED on.** toolchain installation; desktop vs. MCU 
+programming; gcc-avr basics; programming the MCU with avrdude; make an LED turn 
+on. 
 
+**Lesson 2: Inputs, Interrupts and LED Button.** SREG and conditional execution;
+loops; interrupts; controlling and LED with a button.
 
 Useful Resources
 ----------------

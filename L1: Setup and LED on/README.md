@@ -100,8 +100,8 @@ avr-objcopy -O ihex -R .eeprom myfile.elf myfile.hex
 
 Intel HEX format binary file created. This is the MCU's machine code.
 
-Basics of MCU I/O programming - Theory
---------------------------------------
+Basics of Registers and MCU I/O programming - Theory pt. 1
+----------------------------------------------------------
 
 In desktop computers, registers (e.g. EAX) and memory (DRAM) do not share a 
 memory addressing scheme - the registers live only inside the CPU. This is
@@ -110,7 +110,7 @@ microcontrollers, general purope registers (R0-R31), I/O registers
 (64 numbered from $00 to $3F) and SRAM are all assigned addresses on the
 'Data Address Space'. General puropse registers are assigned addresses
 $0000-$001F; I/O registers are assigned addresses $0020-$005F and (for 
-atmega32) internal SRAM is allocated addresses $0060-$085F.Note that this
+atmega32) internal SRAM is allocated addresses $0060-$085F. Note that this
 does not mean that the registers are physically implemented on SRAM.
 
 Note that general purpose registers R26 ($1A) and R27 combine to form
@@ -139,8 +139,8 @@ defined by 6 bits of the instructions opcodes. For example `LDD R1, Y+2`
 register Y into register R1). These more complex instructions take 2 or 
 greater instruction cycles to complete, partly because the instruction
 register (holds current instruction) and program counter register (holds next
-instruction) are only 16-bits, and 16-bits are required to give an SRAM data
-space address.
+instruction address) are only 16-bits, and 16-bits are required to give an SRAM 
+data space address.
 
 Some opcodes work with I/O registers, e.g. 'OUT PORTB, R17'. However the 
 opcodes for IN and OUT instructions requires the IO register address space 

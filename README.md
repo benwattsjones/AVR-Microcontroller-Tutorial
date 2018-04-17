@@ -28,17 +28,17 @@ Useful Resources
 ----------------
 
 Another AVR tutorial series, in C:
-newbiehack.com/MicrocontrollerTutorial.aspx
+http://newbiehack.com/MicrocontrollerTutorial.aspx
 
 Instruction set summary for AVR MCUs:
-avr-tutorials.com/sites/default/files/Instruction Set Summary.pdf
+http://avr-tutorials.com/sites/default/files/Instruction Set Summary.pdf
 
 ATmega32 datasheet:
-ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf
+http://ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf
 
 AVR-libc user manual:
-cs.ou.edu/~fagg/classes/general/atmel/avr-libc-user-manual-1.7.1.pdf
+http://cs.ou.edu/~fagg/classes/general/atmel/avr-libc-user-manual-1.7.1.pdf
 
 All circuit diagrams were drawn using EasyEDA:
-easyeda.com
+http://easyeda.com
 

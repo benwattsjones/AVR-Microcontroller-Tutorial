@@ -104,8 +104,8 @@ Intel HEX format binary file created. This is the MCU's machine code.
 We will now write assembly code to control and LED attacted to the MCU. Before
 we do this however, some theory must be covered.
 
-Basics of Registers and MCU I/O programming - Theory pt. 1
-----------------------------------------------------------
+Basics of Registers and MCU I/O programming - Theory
+----------------------------------------------------
 
 In desktop computers, registers (e.g. EAX) and memory (DRAM) do not share a 
 memory addressing scheme - the registers live only inside the CPU. This is

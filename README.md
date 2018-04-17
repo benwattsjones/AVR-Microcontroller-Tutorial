@@ -31,7 +31,7 @@ Another AVR tutorial series, in C:
 http://newbiehack.com/MicrocontrollerTutorial.aspx
 
 Instruction set summary for AVR MCUs:
-http://avr-tutorials.com/sites/default/files/Instruction Set Summary.pdf
+http://avr-tutorials.com/sites/default/files/Instruction%20Set%20Summary.pdf
 
 ATmega32 datasheet:
 http://ww1.microchip.com/downloads/en/DeviceDoc/doc2503.pdf
